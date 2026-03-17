@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- ================================================
+    第七章 Demo：完整 <head> 示例
+    这个文件的重点就在 <head> 里，<body> 内容极简
+    请仔细阅读每一行注释
+    ================================================ -->
+
+  <!-- 1. 字符编码（必须是 head 内第一个 meta） -->
+  <meta charset="UTF-8" />
+
+  <!-- 2. 视口配置（响应式基础）-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- 3. 标准 SEO 标签 -->
+  <title>理解 HTML 语义化：为什么不能到处用 div？| ZhangWei.dev</title>
+  <!--
+    格式：页面内容 | 品牌名
+    长度：52 个字符（理想范围 50~60）
+    搜索引擎结果：显示为标题超链接
+  -->
+
+  <meta name="description" content="深入解析 HTML 语义化的意义：对 SEO、可访问性和代码维护的影响，以及如何在 React/Next.js 组件中正确应用。" />
+  <!--
+    长度：约 62 个字符（理想 120~160）
+    显示在搜索结果的摘要文字下方
+    不直接影响排名，但影响用户是否点击
+  -->
+
+  <meta name="keywords" content="HTML语义化, SEO, 可访问性, React, Next.js" />
+  <!--
+    keywords 已经基本被搜索引擎忽略（Google 2009 年声明不再使用）
+    但仍然作为约定保留，对内部搜索有用
+  -->
+
+  <meta name="author" content="张伟" />
+  <!-- 作者信息，部分搜索引擎和 RSS 读取器会使用 -->
+
+  <!-- 4. Canonical URL（防止内容重复，集中 SEO 权重）-->
+  <link rel="canonical" href="https://zhangwei.dev/blog/html-semantics" />
+  <!--
+    告诉搜索引擎："不管用户通过哪个 URL 访问，这个是权威版本"
+    解决问题：
+      https://zhangwei.dev/blog/html-semantics
+      https://zhangwei.dev/blog/html-semantics?ref=twitter  ← 同内容
+      https://zhangwei.dev/blog/html-semantics/             ← 同内容
+    都指向同一个 canonical，搜索引擎合并权重而不是分散
+  -->
+
+  <!-- 5. Open Graph（社交分享预览）-->
+  <meta property="og:type" content="article" />
+  <!--
+    og:type 决定显示哪种样式的卡片
+    常用值：article / website / profile / video.movie
+  -->
+
+  <meta property="og:title" content="理解 HTML 语义化：为什么不能到处用 div？" />
+  <!--
+    OG title 可以比 <title> 稍长（没有字符限制）
+    通常与 <title> 相同或去掉品牌名
+  -->
+
+  <meta property="og:description" content="深入解析 HTML 语义化的意义：对 SEO、可访问性和代码维护的影响，以及如何在 React/Next.js 组件中正确应用。" />
+
+  <meta property="og:image" content="https://zhangwei.dev/og/html-semantics.jpg" />
+  <!--
+    分享时显示的预览图片
+    推荐尺寸：1200×630px（1.91:1 比例）
+    格式：JPEG（压缩更好）
+    在 Next.js 中，可以用 next/og 动态生成 OG 图片
+  -->
+
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="文章封面：HTML 语义化主题" />
+
+  <meta property="og:url" content="https://zhangwei.dev/blog/html-semantics" />
+  <!-- 页面的规范 URL，通常与 canonical 一致 -->
+
+  <meta property="og:site_name" content="ZhangWei.dev" />
+  <!-- 网站名称，显示在卡片的子标题区域 -->
+
+  <meta property="og:locale" content="zh_CN" />
+  <!-- 内容语言，zh_CN = 简体中文 -->
+
+  <!-- 文章特有的 OG 属性 -->
+  <meta property="article:published_time" content="2026-03-17T08:00:00+08:00" />
+  <meta property="article:author" content="https://zhangwei.dev/about" />
+  <meta property="article:tag" content="HTML" />
+  <meta property="article:tag" content="语义化" />
+  <meta property="article:tag" content="SEO" />
+  <!--
+    og:type="article" 时可以使用 article: 命名空间属性
+    搜索引擎和社交平台用这些信息生成更丰富的卡片
+  -->
+
+  <!-- 6. Twitter/X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <!--
+    twitter:card 类型：
+    summary            → 小图 + 描述
+    summary_large_image → 大图（推荐，视觉效果更好）
+    app                → App Store 链接卡
+    player             → 视频/音频播放器
+  -->
+  <meta name="twitter:site" content="@zhangwei_dev" />
+  <!-- 你的 Twitter/X 账号 -->
+  <meta name="twitter:title" content="理解 HTML 语义化：为什么不能到处用 div？" />
+  <meta name="twitter:description" content="深入解析 HTML 语义化的意义。" />
+  <meta name="twitter:image" content="https://zhangwei.dev/og/html-semantics.jpg" />
+  <meta name="twitter:image:alt" content="文章封面：HTML 语义化主题" />
+
+  <!-- 7. 图标 -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <!-- 兼容旧浏览器的 .ico 格式 -->
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <!--
+    SVG favicon 的优势：
+    1. 支持 CSS media query → 自动适配深色模式
+    2. 矢量，任何尺寸都清晰
+    3. 文件很小
+    浏览器优先使用 SVG，不支持时 fallback 到 .ico
+  -->
+
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <!-- iOS 设备"添加到主屏幕"时显示的图标（推荐 180×180px） -->
+
+  <link rel="manifest" href="/manifest.json" />
+  <!-- PWA（渐进式 Web 应用）的配置文件 -->
+
+  <!-- 8. 字体预加载（性能优化）-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!--
+    preconnect：提前建立到外部服务器的 DNS + TCP + TLS 连接
+    对 Google Fonts 这类 CDN 很有用
+    比 preload 更轻量，适合"即将要用但不确定具体资源"的情况
+  -->
+
+  <!-- 9. 结构化数据（JSON-LD）-->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "理解 HTML 语义化：为什么不能到处用 div？",
+    "datePublished": "2026-03-17T08:00:00+08:00",
+    "author": {
+      "@type": "Person",
+      "name": "张伟",
+      "url": "https://zhangwei.dev/about"
+    },
+    "description": "深入解析 HTML 语义化的意义",
+    "image": "https://zhangwei.dev/og/html-semantics.jpg"
+  }
+  </script>
+  <!--
+    JSON-LD（JSON for Linked Data）：Google 推荐的结构化数据格式
+    让搜索引擎精确理解页面内容类型
+    可以触发 Google 的"富文本摘要"（Rich Snippets）——
+    比如在搜索结果中显示星级评分、食谱步骤、FAQ 等
+
+    @type 常用值：Article / BlogPosting / Product / FAQPage / BreadcrumbList
+  -->
+
+  <!-- 10. 样式表 -->
+  <style>
+    body { font-family: sans-serif; max-width: 760px; margin: 60px auto; padding: 0 20px; line-height: 1.7; color: #1a1a1a; }
+    .meta-table { width: 100%; border-collapse: collapse; }
+    .meta-table th, .meta-table td { padding: 10px 14px; border: 1px solid #e0e0e0; text-align: left; font-size: 0.875em; }
+    .meta-table th { background: #f5f5f5; width: 35%; }
+    .meta-table td code { background: #f0f0f0; padding: 2px 4px; border-radius: 3px; font-size: 0.9em; word-break: break-all; }
+    .note { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 16px 0; font-size: 0.9em; }
+    hr { border: none; border-top: 1px solid #e0e0e0; margin: 32px 0; }
+  </style>
+
+</head>
+<body>
+
+  <h1>第七章：&lt;head&gt; 与 SEO / 性能</h1>
+  <p>这个页面的主要学习内容在 <code>&lt;head&gt;</code> 标签内，请用浏览器开发者工具查看 <strong>Elements</strong> 面板中的 <code>&lt;head&gt;</code> 部分，对照代码注释理解每个标签的作用。</p>
+
+  <div class="note">
+    <strong>查看方式：</strong>按 F12 → Elements → 展开 &lt;head&gt; 节点，逐行阅读。
+  </div>
+
+  <hr />
+
+  <h2>当前页面 &lt;head&gt; 内容总结</h2>
+
+  <table class="meta-table">
+    <thead>
+      <tr>
+        <th>标签</th>
+        <th>值 / 说明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>charset</th>
+        <td><code>UTF-8</code></td>
+      </tr>
+      <tr>
+        <th>viewport</th>
+        <td><code>width=device-width, initial-scale=1.0</code></td>
+      </tr>
+      <tr>
+        <th>title</th>
+        <td><code>理解 HTML 语义化：... | ZhangWei.dev</code>（52 字符）</td>
+      </tr>
+      <tr>
+        <th>description</th>
+        <td>约 62 字符的描述摘要</td>
+      </tr>
+      <tr>
+        <th>canonical</th>
+        <td><code>https://zhangwei.dev/blog/html-semantics</code></td>
+      </tr>
+      <tr>
+        <th>og:type</th>
+        <td><code>article</code></td>
+      </tr>
+      <tr>
+        <th>og:image</th>
+        <td>1200×630px 的预览图</td>
+      </tr>
+      <tr>
+        <th>twitter:card</th>
+        <td><code>summary_large_image</code></td>
+      </tr>
+      <tr>
+        <th>favicon</th>
+        <td>.ico + .svg 双保险</td>
+      </tr>
+      <tr>
+        <th>JSON-LD</th>
+        <td>Article 类型结构化数据</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>在 Next.js 中的对应写法</h2>
+  <p>以上所有内容，在 Next.js App Router 中通过 <code>generateMetadata</code> 函数自动生成：</p>
+  <pre style="background:#f0f0f0;padding:16px;border-radius:8px;overflow-x:auto;font-size:0.875em;"><code>// app/blog/[slug]/page.tsx
+export async function generateMetadata({ params }): Promise&lt;Metadata&gt; {
+  const post = await getPost(params.slug);
+  return {
+    title: `${post.title} | ZhangWei.dev`,
+    description: post.excerpt,
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      images: [{ url: post.ogImage, width: 1200, height: 630 }],
+    },
+    twitter: { card: "summary_large_image" },
+    alternates: { canonical: `https://zhangwei.dev/blog/${params.slug}` },
+  };
+}</code></pre>
+
+</body>
+</html>

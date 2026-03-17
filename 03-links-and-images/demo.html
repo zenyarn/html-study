@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>链接与图片 | 第三章 Demo</title>
+  <style>
+    body { font-family: sans-serif; max-width: 760px; margin: 40px auto; padding: 0 20px; line-height: 1.7; }
+    nav { background: #1a1a1a; padding: 12px 20px; border-radius: 8px; margin-bottom: 32px; }
+    nav a { color: #fff; text-decoration: none; margin-right: 20px; }
+    nav a:hover { color: #60a5fa; }
+    figure { margin: 24px 0; }
+    figcaption { font-size: 0.875em; color: #666; text-align: center; margin-top: 8px; }
+    .card { border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; margin: 16px 0; }
+    .card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+    .card-body { padding: 16px; }
+    hr { border: none; border-top: 1px solid #e0e0e0; margin: 32px 0; }
+    code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    .warning { background: #fff3cd; border: 1px solid #ffc107; padding: 12px 16px; border-radius: 6px; }
+    .safe { background: #d4edda; border: 1px solid #28a745; padding: 12px 16px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+    一、导航链接
+    ========================================== -->
+  <nav>
+    <a href="/">首页</a>
+    <a href="/about">关于</a>
+    <a href="/projects">项目</a>
+    <a href="/blog">博客</a>
+    <a href="mailto:hello@example.com">联系我</a>
+  </nav>
+  <!--
+    导航栏通常由一组 <a> 构成
+    注意：href="/" 表示网站根路径，href="#" 是占位符（避免使用）
+    在第六章会学到用 <nav> 语义标签包裹导航
+    在 Next.js 中，所有站内链接应替换为 <Link> 组件
+  -->
+
+  <h1>链接与图片演示</h1>
+
+  <!-- ==========================================
+    二、各种链接形式
+    ========================================== -->
+  <h2>链接的各种形式</h2>
+
+  <h3>外部链接（注意安全属性）</h3>
+
+  <div class="warning">
+    <strong>危险：</strong>缺少 rel 属性的外部链接<br />
+    <code>&lt;a href="https://example.com" target="_blank"&gt;危险链接&lt;/a&gt;</code>
+  </div>
+
+  <div class="safe" style="margin-top: 12px;">
+    <strong>安全：</strong>正确的外部链接写法<br />
+    <a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">
+      MDN Web 文档（安全打开新标签页）
+    </a>
+  </div>
+  <!--
+    target="_blank"：在新标签页打开
+    rel="noopener"：切断 window.opener 引用（防止目标页反向操控当前页）
+    rel="noreferrer"：不发送 Referer 请求头（隐私保护）
+    两个一起写，缺一不可
+  -->
+
+  <hr />
+
+  <h3>页面内锚点跳转</h3>
+  <p>
+    <a href="#section-images">跳转到图片部分</a> |
+    <a href="#section-figure">跳转到 figure 示例</a>
+  </p>
+  <!--
+    href="#id名称" 会让页面平滑滚动到对应元素
+    目标元素需要有相同的 id 属性
+    常用于：文章目录、FAQ、单页应用的锚点导航
+  -->
+
+  <h3>邮件与电话链接</h3>
+  <p>
+    <a href="mailto:hello@example.com">发送邮件</a>（点击会打开邮件客户端）
+  </p>
+  <p>
+    <a href="tel:+8613800138000">+86 138-0013-8000</a>（移动端点击会拨打）
+  </p>
+
+  <h3>下载链接</h3>
+  <p>
+    <a href="/files/resume.pdf" download="张伟的简历.pdf">下载我的简历（PDF）</a>
+  </p>
+  <!--
+    download 属性：触发下载而不是导航
+    属性值是下载后的文件名（可以与服务器文件名不同）
+  -->
+
+  <hr />
+
+  <!-- ==========================================
+    三、图片
+    ========================================== -->
+  <h2 id="section-images">图片的正确写法</h2>
+
+  <h3>有意义的图片 —— 必须写描述性 alt</h3>
+  <!--
+    注意：以下使用了在线的占位图服务 URL 作演示
+    实际开发中图片来自本地或 CDN
+  -->
+  <img
+    src="https://picsum.photos/seed/cat/400/250"
+    alt="随机风景照片，用于演示 alt 属性"
+    width="400"
+    height="250"
+  />
+  <!--
+    alt：描述图片内容，让屏幕阅读器用户、图片加载失败的用户都能获取信息
+    width/height：提前告知浏览器图片尺寸，防止加载时的布局抖动（Layout Shift）
+  -->
+
+  <h3>错误示范对比</h3>
+  <p style="color: red;">
+    ✗ 错误：<code>&lt;img src="cat.jpg" alt="图片" /&gt;</code>（alt 无意义）<br />
+    ✗ 错误：<code>&lt;img src="cat.jpg" /&gt;</code>（省略 alt，屏幕阅读器会读文件名）<br />
+    ✓ 正确：<code>&lt;img src="cat.jpg" alt="一只橘猫坐在阳光下" width="400" height="300" /&gt;</code>
+  </p>
+
+  <hr />
+
+  <!-- ==========================================
+    四、figure + figcaption
+    ========================================== -->
+  <h2 id="section-figure">figure 与 figcaption</h2>
+
+  <figure>
+    <img
+      src="https://picsum.photos/seed/chart/600/300"
+      alt="2026年Q1用户增长折线图，3月达到峰值约15000人"
+      width="600"
+      height="300"
+      style="width: 100%; height: auto; border-radius: 8px;"
+    />
+    <figcaption>图 1：2026 年第一季度用户增长趋势（单位：人）</figcaption>
+  </figure>
+  <!--
+    figure：表示独立的、可引用的内容块
+    figcaption：是这个 figure 的标题/说明
+    两者配合使用，语义上是"图片+配套说明"
+
+    style="width: 100%; height: auto;"：响应式图片的基础 CSS
+    在 Tailwind 中：className="w-full h-auto"
+  -->
+
+  <figure>
+    <pre><code>// 这个代码块也可以用 figure 包裹
+function add(a: number, b: number): number {
+  return a + b;
+}</code></pre>
+    <figcaption>代码示例：TypeScript 加法函数</figcaption>
+  </figure>
+  <!--
+    figure 不只用于图片，代码块、引用块等也可以放在 figure 里
+  -->
+
+  <hr />
+
+  <!-- ==========================================
+    五、图片格式讨论（文字说明）
+    ========================================== -->
+  <h2>图片格式选择指南</h2>
+
+  <p>在实际项目中，根据场景选择图片格式：</p>
+  <ul>
+    <li><strong>SVG</strong>：图标、Logo、简单矢量图 → 无限缩放，文件极小</li>
+    <li><strong>WebP</strong>：照片、复杂图像 → 比 JPEG 小 25~35%，现代浏览器均支持</li>
+    <li><strong>PNG</strong>：需要透明背景的图、截图 → 无损但文件大</li>
+    <li><strong>JPEG</strong>：旧项目兼容，否则用 WebP 替代</li>
+  </ul>
+
+  <p>
+    在 <strong>Next.js</strong> 中，<code>&lt;Image&gt;</code> 组件会自动将上传的图片转换为 WebP 格式，
+    并根据设备分辨率提供合适尺寸。这就是为什么要理解原生 <code>&lt;img&gt;</code> ——
+    你需要知道 Next.js 在背后做了什么优化。
+  </p>
+
+</body>
+</html>

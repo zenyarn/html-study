@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>文本语义标签 | 第二章 Demo</title>
+  <style>
+    /* 极简样式，让内容更易读。真正学习时会用 Tailwind 替代 */
+    body { font-family: sans-serif; max-width: 760px; margin: 40px auto; padding: 0 20px; line-height: 1.7; color: #1a1a1a; }
+    code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #f0f0f0; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    pre code { background: none; padding: 0; }
+    blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 20px; color: #555; }
+    del { color: #999; }
+    ins { color: #22a830; text-decoration: none; font-weight: bold; }
+    abbr { text-decoration: underline dotted; cursor: help; }
+    hr { border: none; border-top: 1px solid #e0e0e0; margin: 32px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+    一、标题层级
+    ========================================== -->
+  <h1>张伟的技术博客</h1>
+  <!--
+    h1 是页面唯一的主标题
+    对 SEO 来说，h1 是最重要的内容信号
+    在 Next.js 中，每个页面的 h1 应与 <title> 内容对应
+  -->
+
+  <h2>关于我</h2>
+  <!--
+    h2 是章节标题
+    注意：不要因为"h3 小一点更好看"就用 h3，层级要有意义
+    如果需要调整大小，用 CSS/Tailwind
+  -->
+
+  <h3>技术背景</h3>
+  <!-- h3 是 h2 的子章节，表示"技术背景"是"关于我"的一个细分 -->
+
+  <p>我是一名全栈开发者，熟悉 <code>C++</code>、<code>Python</code>、<code>JavaScript</code> 和 <code>TypeScript</code>。</p>
+  <!--
+    <code> 用于行内代码片段
+    语义：告诉机器"这是代码标识符，不是普通文字"
+    效果：等宽字体 + 背景色（上面 CSS 定义的）
+  -->
+
+  <h3>当前目标</h3>
+  <p>目前正在系统学习 <abbr title="HyperText Markup Language">HTML</abbr> 基础，为 Next.js 全栈开发打好地基。</p>
+  <!--
+    <abbr> 表示缩写，title 属性提供完整含义
+    鼠标悬停时浏览器显示 tooltip
+    对可访问性有帮助：屏幕阅读器可以读出完整名称
+  -->
+
+  <hr />
+  <!-- <hr> 水平分隔线，语义是"话题转换"，不只是视觉分隔 -->
+
+  <!-- ==========================================
+    二、语义 vs 表现：strong/b, em/i 的区别
+    ========================================== -->
+  <h2>语义 vs 表现</h2>
+
+  <p>
+    使用 <strong>strong</strong> 表示内容<strong>非常重要或紧急</strong>，屏幕阅读器会加重语气朗读。<br />
+    使用 <b>b</b> 只是<b>视觉加粗</b>，没有语义含义，屏幕阅读器会正常朗读。
+  </p>
+
+  <p>
+    使用 <em>em</em> 表示<em>语气强调</em>（"我是说<em>他</em>，不是你"），屏幕阅读器会改变语调。<br />
+    使用 <i>i</i> 只是<i>视觉斜体</i>（常用于外来词、术语、思想），没有强调语义。
+  </p>
+
+  <p>
+    <strong>核心原则：</strong>想表达"这个内容很重要"→ 用 <code>strong</code>；
+    只是想让文字粗一点 → 用 CSS/Tailwind 的 <code>font-bold</code>。
+  </p>
+
+  <hr />
+
+  <!-- ==========================================
+    三、代码块
+    ========================================== -->
+  <h2>代码展示</h2>
+  <p>下面是一个 TypeScript 函数：</p>
+
+  <pre><code>function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet("World")); // Hello, World!</code></pre>
+  <!--
+    <pre>：preformatted text，保留原始空白和换行
+    <code>：标记代码内容
+    两者配合 = 代码块（block code）
+    单独用 <code> = 行内代码（inline code）
+
+    在 React 组件中，代码高亮通常用 highlight.js 或 shiki 处理，
+    但底层 HTML 结构就是这个 pre + code 的组合。
+  -->
+
+  <hr />
+
+  <!-- ==========================================
+    四、引用、删除、插入
+    ========================================== -->
+  <h2>引用与修订</h2>
+
+  <blockquote cite="https://developer.mozilla.org">
+    <p>任何足够先进的技术，都与魔法无异。</p>
+    <p>— 阿瑟·C·克拉克</p>
+  </blockquote>
+  <!--
+    <blockquote>：块级引用，通常来自外部来源
+    cite 属性注明来源 URL，虽然不显示但对机器可读有意义
+    内部通常用 <p> 包裹引用内容
+  -->
+
+  <p>
+    课程原价：<del>¥1999</del>，限时特价：<ins>¥299</ins>
+  </p>
+  <!--
+    <del>：表示被删除/不再有效的内容（不只是删除线样式）
+    <ins>：表示新插入/新增的内容
+    常见于：价格变更、文档修订、diff 展示
+  -->
+
+  <hr />
+
+  <!-- ==========================================
+    五、上标、下标、时间
+    ========================================== -->
+  <h2>科学与时间</h2>
+
+  <p>水的化学式：H<sub>2</sub>O</p>
+  <p>爱因斯坦质能方程：E = mc<sup>2</sup></p>
+  <!--
+    <sub>：下标（subscript）
+    <sup>：上标（superscript）
+    不只是视觉效果，屏幕阅读器会正确解读
+  -->
+
+  <p>
+    本文发布于：<time datetime="2026-03-17">2026 年 3 月 17 日</time>
+  </p>
+  <!--
+    <time>：表示时间或日期
+    datetime 属性是机器可读的标准格式（ISO 8601）
+    显示文字可以是任何人类可读的格式
+    搜索引擎和社交平台会读取 datetime 属性
+  -->
+
+  <hr />
+
+  <!-- ==========================================
+    六、div 和 span 的正确用法
+    ========================================== -->
+  <h2>div 与 span 的定位</h2>
+
+  <p>
+    这个价格标签
+    <span style="color: red; font-weight: bold;">¥99</span>
+    使用了 span 来给部分文字单独加样式。
+  </p>
+  <!--
+    span 是内联无语义容器
+    当你只需要给文本中的某一部分加样式，又没有合适的语义标签时使用
+    在 React + Tailwind 中：<span className="text-red-600 font-bold">
+  -->
+
+  <div style="background: #f9f9f9; padding: 16px; border-radius: 8px;">
+    <h3>这是一个卡片组件</h3>
+    <p>当没有合适的语义标签时，用 div 作为布局容器。</p>
+    <p>但在这个例子里，更合适的标签其实是 <code>&lt;article&gt;</code> 或 <code>&lt;section&gt;</code>，我们会在第六章学习。</p>
+  </div>
+  <!--
+    div 是块级无语义容器
+    使用时机：需要一个容器来包裹元素用于布局或样式，但没有合适的语义标签
+    如果有合适的语义标签（article/section/nav 等），优先使用它们
+  -->
+
+</body>
+</html>

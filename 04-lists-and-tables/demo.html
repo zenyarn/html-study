@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>列表与表格 | 第四章 Demo</title>
+  <style>
+    body { font-family: sans-serif; max-width: 860px; margin: 40px auto; padding: 0 20px; line-height: 1.7; }
+    nav ul { display: flex; list-style: none; padding: 0; margin: 0; gap: 24px; background: #1a1a1a; padding: 12px 20px; border-radius: 8px; }
+    nav a { color: #fff; text-decoration: none; }
+    nav a:hover { color: #60a5fa; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    th, td { border: 1px solid #ddd; padding: 10px 14px; text-align: left; }
+    th { background: #f5f5f5; }
+    caption { font-weight: bold; margin-bottom: 8px; text-align: left; }
+    tfoot td { background: #f9f9f9; font-weight: bold; }
+    dl dt { font-weight: bold; margin-top: 12px; }
+    dl dd { margin-left: 24px; color: #555; }
+    hr { border: none; border-top: 1px solid #e0e0e0; margin: 32px 0; }
+    .tip { background: #e8f4fd; border-left: 4px solid #3b82f6; padding: 10px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+    一、导航栏（无序列表 + CSS）
+    ========================================== -->
+  <nav>
+    <ul>
+      <!--
+        导航栏的标准 HTML 结构：nav > ul > li > a
+        CSS 用 display: flex 把竖向列表改成横向导航
+        在 Tailwind 中：ul className="flex gap-6 list-none"
+      -->
+      <li><a href="/">首页</a></li>
+      <li><a href="#ul-demo">无序列表</a></li>
+      <li><a href="#ol-demo">有序列表</a></li>
+      <li><a href="#dl-demo">描述列表</a></li>
+      <li><a href="#table-demo">表格</a></li>
+    </ul>
+  </nav>
+
+  <h1>列表与表格演示</h1>
+
+  <!-- ==========================================
+    二、无序列表
+    ========================================== -->
+  <h2 id="ul-demo">无序列表 &lt;ul&gt;</h2>
+
+  <h3>基础无序列表</h3>
+  <ul>
+    <li>TypeScript</li>
+    <li>React</li>
+    <li>Next.js</li>
+    <li>Tailwind CSS</li>
+  </ul>
+  <!--
+    ul = unordered list（无序列表）
+    li = list item（列表项）
+    顺序不重要，调换位置含义不变
+  -->
+
+  <h3>嵌套列表</h3>
+  <ul>
+    <li>
+      前端技术
+      <ul>
+        <li>框架：React、Vue、Angular</li>
+        <li>样式：Tailwind CSS、CSS Modules</li>
+        <li>语言：TypeScript</li>
+      </ul>
+    </li>
+    <li>
+      后端技术
+      <ul>
+        <li>运行时：Node.js</li>
+        <li>框架：Next.js API Routes、Express</li>
+        <li>数据库：PostgreSQL、MongoDB</li>
+      </ul>
+    </li>
+  </ul>
+  <!--
+    列表可以嵌套：li 内可以再放 ul 或 ol
+    多层嵌套表示层级关系（分类和子分类）
+    浏览器会自动用不同的符号（实心圆→空心圆→方块）
+  -->
+
+  <div class="tip">
+    <strong>关键认知：</strong>几乎所有网站的导航栏，本质都是一个无序列表。
+    CSS 只是改变了它的视觉呈现方式（横向排列、去掉项目符号）。
+  </div>
+
+  <hr />
+
+  <!-- ==========================================
+    三、有序列表
+    ========================================== -->
+  <h2 id="ol-demo">有序列表 &lt;ol&gt;</h2>
+
+  <h3>安装步骤</h3>
+  <ol>
+    <li>安装 Node.js（推荐 v20 LTS）</li>
+    <li>运行 <code>npx create-next-app@latest my-app</code></li>
+    <li>进入项目目录：<code>cd my-app</code></li>
+    <li>启动开发服务器：<code>npm run dev</code></li>
+    <li>在浏览器打开 <code>http://localhost:3000</code></li>
+  </ol>
+  <!--
+    ol = ordered list（有序列表）
+    顺序非常重要，步骤必须按序执行
+    浏览器默认显示数字编号（1, 2, 3...）
+  -->
+
+  <h3>带自定义属性的列表</h3>
+  <ol start="3" type="A">
+    <!--
+      start="3"：从第 3 个编号开始（但 type 是字母时，从 C 开始）
+      type="A"：用大写字母编号（A, B, C...）
+      type="a"：小写字母
+      type="i"：小写罗马数字
+      type="I"：大写罗马数字
+    -->
+    <li>第三名：Python</li>
+    <li>第四名：Java</li>
+    <li>第五名：Go</li>
+  </ol>
+
+  <hr />
+
+  <!-- ==========================================
+    四、描述列表
+    ========================================== -->
+  <h2 id="dl-demo">描述列表 &lt;dl&gt;</h2>
+
+  <h3>术语词典</h3>
+  <dl>
+    <dt>DOM</dt>
+    <dd>Document Object Model，文档对象模型。浏览器解析 HTML 后生成的树形数据结构。</dd>
+
+    <dt>SEO</dt>
+    <dd>Search Engine Optimization，搜索引擎优化。通过改善网站内容和结构，提升在搜索结果中的排名。</dd>
+
+    <dt>CLS</dt>
+    <dd>Cumulative Layout Shift，累积布局偏移。衡量页面视觉稳定性的 Core Web Vitals 指标之一。</dd>
+  </dl>
+  <!--
+    dl = description list（描述列表）
+    dt = description term（术语/键）
+    dd = description description（定义/值）
+
+    一个 dt 可以有多个 dd（多个解释）
+    一个 dd 也可以对应多个 dt（多个别名）
+  -->
+
+  <h3>商品规格（键值对场景）</h3>
+  <dl>
+    <dt>型号</dt>
+    <dd>MacBook Pro 14"</dd>
+
+    <dt>处理器</dt>
+    <dd>Apple M4 Pro</dd>
+
+    <dt>内存</dt>
+    <dd>24 GB 统一内存</dd>
+
+    <dt>存储</dt>
+    <dd>512 GB SSD</dd>
+  </dl>
+
+  <hr />
+
+  <!-- ==========================================
+    五、表格
+    ========================================== -->
+  <h2 id="table-demo">表格 &lt;table&gt;</h2>
+
+  <h3>完整语义化表格</h3>
+  <table>
+    <caption>2026 年 Q1 编程语言学习进度</caption>
+    <!--
+      caption 是表格的标题，像图片的 figcaption
+      语义上与表格绑定，浏览器默认渲染在表格上方
+    -->
+    <thead>
+      <!--
+        thead 包含表头行，浏览器打印时每页都会重复显示
+        如果表格很长需要翻页，这非常有用
+      -->
+      <tr>
+        <th scope="col">语言 / 技术</th>
+        <th scope="col">当前水平</th>
+        <th scope="col">学习时长</th>
+        <th scope="col">下一步目标</th>
+      </tr>
+      <!--
+        th 表示表头单元格，默认加粗居中
+        scope="col" 表示这个 th 是列标题（帮助屏幕阅读器导航）
+        scope="row" 表示这个 th 是行标题
+      -->
+    </thead>
+    <tbody>
+      <!--
+        tbody 包含数据行
+        即使你不写 tbody，浏览器也会自动插入它（可以在 DevTools 中看到）
+        但最好显式写出来，代码更清晰
+      -->
+      <tr>
+        <th scope="row">TypeScript</th>
+        <td>中级</td>
+        <td>6 个月</td>
+        <td>掌握高级类型体操</td>
+      </tr>
+      <tr>
+        <th scope="row">HTML</th>
+        <td>初级（进行中）</td>
+        <td>1 周</td>
+        <td>完成语义化布局</td>
+      </tr>
+      <tr>
+        <th scope="row">React</th>
+        <td>入门</td>
+        <td>1 个月</td>
+        <td>掌握 Hooks + 状态管理</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <!--
+        tfoot 通常放汇总行、合计行
+      -->
+      <tr>
+        <td colspan="2">共 3 项技术</td>
+        <!--
+          colspan="2"：这个单元格横向跨越 2 列
+          即合并了"语言"和"当前水平"两列
+        -->
+        <td>约 7 个月</td>
+        <td>—</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <h3>合并单元格示例</h3>
+  <table>
+    <caption>课程表（合并单元格演示）</caption>
+    <thead>
+      <tr>
+        <th scope="col">时间</th>
+        <th scope="col">周一</th>
+        <th scope="col">周二</th>
+        <th scope="col">周三</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">上午</th>
+        <td colspan="2">HTML 学习（跨两列）</td>
+        <!--
+          colspan="2"：这个单元格占据"周一"和"周二"两列
+          注意：这一行只有 3 个 td（而不是 4 个），因为合并了
+        -->
+        <td>休息</td>
+      </tr>
+      <tr>
+        <th scope="row">下午</th>
+        <td rowspan="2">CSS 复习（跨两行）</td>
+        <!--
+          rowspan="2"：这个单元格纵向跨越"下午"和"晚上"两行
+          注意：下一行对应列的 td 要减少一个
+        -->
+        <td>React 练习</td>
+        <td>TypeScript</td>
+      </tr>
+      <tr>
+        <th scope="row">晚上</th>
+        <!-- 注意：这行少了一个 td，因为上一行的 rowspan 占了这里 -->
+        <td>项目实践</td>
+        <td>代码 Review</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
