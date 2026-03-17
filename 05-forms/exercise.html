@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>练习五：注册表单</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; line-height: 1.7; }
+    form { background: #f9f9f9; padding: 32px; border-radius: 12px; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9em; }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select,
+    textarea { width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1em; box-sizing: border-box; }
+    input[type="radio"],
+    input[type="checkbox"] { margin-right: 6px; }
+    .radio-label,
+    .check-label { display: flex; align-items: center; font-weight: normal; margin-bottom: 8px; cursor: pointer; }
+    fieldset { border: 1px solid #d1d5db; border-radius: 6px; padding: 16px; margin-bottom: 20px; }
+    legend { font-weight: 600; padding: 0 8px; }
+    .hint { font-size: 0.8em; color: #6b7280; margin-top: 4px; }
+    button { width: 100%; padding: 12px; background: #1a1a1a; color: #fff; border: none; border-radius: 6px; font-size: 1em; cursor: pointer; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <!--
+    练习五：手写注册表单
+    ============================================================
+    要求（逐步完成）：
+
+    1. 【表单容器】
+       创建一个 <form> 标签，action="/api/register"，method="POST"
+       在里面加一个 h2 标题："开发者社区注册"
+
+    2. 【文本输入字段】（每个字段都需要 label + input，且 for/id 正确配对）
+       a. 昵称（必填）
+          - type="text"，name="nickname"
+          - 添加 placeholder 和 minlength="2" maxlength="15"
+          - 加一个 .hint 说明"2~15 个字符"
+
+       b. 邮箱（必填）
+          - type="email"，name="email"
+          - 正确的 autocomplete 属性
+
+       c. 密码（必填）
+          - type="password"，name="password"，minlength="8"
+          - 正确的 autocomplete 属性（这是新密码）
+
+       d. GitHub 主页链接（选填）
+          - type="url"，name="github"
+          - placeholder 示例：https://github.com/yourname
+
+    3. 【单选按钮组（fieldset + legend）】
+       问"你主要使用哪个操作系统？"
+       选项：macOS / Windows / Linux
+       - 每个 radio 用相同的 name="os"
+       - 每个 radio 用 label 包裹（不用 for/id 方式）
+
+    4. 【复选框组（fieldset + legend）】
+       问"你感兴趣的方向？（可多选）"
+       选项：前端开发 / 后端开发 / DevOps / 开源贡献
+       - name="direction"，每个不同的 value
+       - 每个 checkbox 用 label 包裹
+
+    5. 【下拉选择】
+       学习阶段选择，name="level"
+       选项：
+       - 第一个是空值提示项（"-- 请选择 --"，value=""）
+       - 初学者（< 1年）
+       - 有一定基础（1~3年）
+       - 有经验（3~5年）
+       - 资深（5年以上）
+
+    6. 【多行文本】
+       "希望在社区收获什么？" 的 textarea
+       - rows="4"，maxlength="200"，name="expectation"
+       - 加 placeholder 和 hint 说明"最多 200 字"
+
+    7. 【提交按钮】
+       一个 type="submit" 的 <button>，文字"立即注册"
+
+    检验清单：
+    □ 每个 input 都有对应的 label，for 和 id 正确配对（或 label 包裹）
+    □ 所有 input 都有 name 属性
+    □ radio 同组的 name 相同
+    □ fieldset + legend 用于分组 radio 和 checkbox
+    □ 点击 label 文字能聚焦/切换对应的输入控件
+    □ 用浏览器打开，点击提交，能看到哪些字段触发了验证
+    □ 缩小浏览器窗口到手机宽度，表单依然可用
+    ============================================================
+  -->
+
+  <!-- TODO: 在这里写你的表单 -->
+
+</body>
+</html>

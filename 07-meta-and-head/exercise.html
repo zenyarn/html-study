@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+  练习七：为你的博客文章补充完整的 <head>
+  ============================================================
+  这是最后一章的练习。
+
+  任务：
+  为你在练习六中写的博客文章页面，补充以下所有 <head> 内容。
+  你需要把以下内容填写在正确位置，并根据你的"假想页面"
+  填入真实有意义的内容（不要复制 demo 里的占位值）。
+
+  ① 必须有（基础 SEO）：
+     - charset
+     - viewport
+     - title（格式：文章标题 | 你的网站名）
+     - description（120~160 字符，描述你的文章内容）
+     - canonical（假设你的网站是 https://你的名字.dev/blog/文章slug）
+
+  ② 必须有（社交分享）：
+     - og:type → article
+     - og:title
+     - og:description（可以与 description 相同或略短）
+     - og:image（填一个假设的 URL，格式合理即可）
+     - og:image:width 和 og:image:height
+     - og:url
+     - og:site_name
+
+  ③ 必须有（Twitter Card）：
+     - twitter:card → summary_large_image
+     - twitter:title
+     - twitter:image
+
+  ④ 加分项（可选）：
+     - favicon 链接（.ico + .svg 双版本）
+     - og:locale
+     - article:published_time（用 ISO 8601 格式：2026-03-17T10:00:00+08:00）
+     - JSON-LD 结构化数据（Article 类型）
+
+  完成后自查：
+  □ title 字符数是否在 50~60 之间？
+  □ description 是否在 120~160 字符？
+  □ og:image 的 width/height 比例是否接近 1.91:1（如 1200×630）？
+  □ canonical URL 和 og:url 是否一致？
+  □ 所有 og: 属性都使用了 property="" 而不是 name=""？
+  □ 所有 twitter: 属性都使用了 name="" 而不是 property=""？
+
+  注意：og 标签用 property，twitter 标签用 name——这是规范要求，不能混用。
+
+  工具：完成后可以用以下工具验证（等你有真实 URL 时）：
+  - Facebook 分享调试：developers.facebook.com/tools/debug
+  - Twitter Card Validator：cards-dev.twitter.com/validator
+  - Google 富文本结果测试：search.google.com/test/rich-results
+  ============================================================
+-->
+<html lang="zh-CN">
+<head>
+
+  <!-- TODO: 在这里写完整的 <head> 内容 -->
+
+</head>
+<body>
+
+  <!-- 这里复制或重写你在练习六中完成的博客页面内容 -->
+  <!-- 或者只写一个简单的占位内容，重点是 <head> 部分 -->
+
+  <main>
+    <article>
+      <h1>你的文章标题（与 <title> 保持一致）</h1>
+      <p>这里是文章内容...</p>
+    </article>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>表单 | 第五章 Demo</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; line-height: 1.7; color: #1a1a1a; }
+    form { background: #f9f9f9; padding: 32px; border-radius: 12px; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9em; color: #374151; }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    select,
+    textarea { width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1em; box-sizing: border-box; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
+    input[type="radio"],
+    input[type="checkbox"] { margin-right: 6px; }
+    .radio-group label,
+    .checkbox-group label { display: flex; align-items: center; font-weight: normal; margin-bottom: 8px; cursor: pointer; }
+    fieldset { border: 1px solid #d1d5db; border-radius: 6px; padding: 16px; margin-bottom: 20px; }
+    legend { font-weight: 600; padding: 0 8px; font-size: 0.9em; color: #374151; }
+    .hint { font-size: 0.8em; color: #6b7280; margin-top: 4px; }
+    .error-example { border-color: #ef4444 !important; }
+    .error-msg { color: #ef4444; font-size: 0.8em; margin-top: 4px; }
+    button[type="submit"] { width: 100%; padding: 12px; background: #1a1a1a; color: #fff; border: none; border-radius: 6px; font-size: 1em; cursor: pointer; font-weight: 600; }
+    button[type="submit"]:hover { background: #374151; }
+    button[type="reset"] { width: 100%; padding: 10px; background: transparent; color: #6b7280; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1em; cursor: pointer; margin-bottom: 12px; }
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 32px 0; }
+    code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.875em; }
+  </style>
+</head>
+<body>
+
+  <h1>第五章：表单演示</h1>
+
+  <!-- ==========================================
+    完整注册表单
+    ========================================== -->
+  <form action="/api/register" method="POST" novalidate>
+    <!--
+      action：表单提交的目标 URL
+      method="POST"：数据在请求体中（不暴露在 URL 里），用于创建资源
+      novalidate：禁用浏览器内置验证（演示用），实际项目通常去掉这个
+    -->
+
+    <h2 style="margin-top: 0;">创建账号</h2>
+
+    <!-- ——— 用户名 ——— -->
+    <div class="form-group">
+      <label for="username">
+        用户名
+        <span style="color: #ef4444;" aria-hidden="true">*</span>
+      </label>
+      <!--
+        label for="username" 与 input id="username" 关联
+        span 显示必填红星，aria-hidden="true" 让屏幕阅读器忽略它
+        （屏幕阅读器通过 required 属性知道字段是必填的）
+      -->
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="例：zhangwei_dev"
+        required
+        minlength="3"
+        maxlength="20"
+        autocomplete="username"
+      />
+      <p class="hint">3~20 个字符，只能包含字母、数字和下划线</p>
+      <!--
+        hint 是辅助说明，不是错误信息
+        placeholder 展示格式示例，不替代 label 的作用
+        autocomplete 帮助密码管理器和浏览器自动填充
+      -->
+    </div>
+
+    <!-- ——— 邮箱 ——— -->
+    <div class="form-group">
+      <label for="email">邮箱地址 <span style="color: #ef4444;" aria-hidden="true">*</span></label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="例：hello@example.com"
+        required
+        autocomplete="email"
+      />
+      <!--
+        type="email"：
+        - 浏览器自动验证 @ 符号和域名格式
+        - 移动端显示含 @ 的邮件键盘
+        - 密码管理器能识别这是邮件字段
+      -->
+    </div>
+
+    <!-- ——— 密码 ——— -->
+    <div class="form-group">
+      <label for="password">密码 <span style="color: #ef4444;" aria-hidden="true">*</span></label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+        minlength="8"
+        autocomplete="new-password"
+      />
+      <p class="hint">至少 8 个字符</p>
+      <!--
+        type="password"：字符显示为圆点
+        autocomplete="new-password"：提示密码管理器"这是新密码字段"（区别于登录）
+      -->
+    </div>
+
+    <!-- ——— 确认密码 ——— -->
+    <div class="form-group">
+      <label for="confirm-password">确认密码 <span style="color: #ef4444;" aria-hidden="true">*</span></label>
+      <input
+        type="password"
+        id="confirm-password"
+        name="confirmPassword"
+        required
+        autocomplete="new-password"
+      />
+      <!--
+        两个密码字段的 id/name 不同（password vs confirmPassword）
+        实际验证两个密码是否一致需要 JS（HTML5 自身不支持跨字段比较）
+      -->
+    </div>
+
+    <!-- ——— 手机号 ——— -->
+    <div class="form-group">
+      <label for="phone">手机号</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="例：13800138000"
+        pattern="1[3-9]\d{9}"
+        autocomplete="tel"
+      />
+      <p class="hint">可选。中国大陆手机号（11 位）</p>
+      <!--
+        type="tel"：移动端弹出数字键盘
+        pattern：正则表达式验证（1开头，第2位3-9，后面9个数字）
+        注意：type="tel" 本身不验证格式，需要 pattern 配合
+      -->
+    </div>
+
+    <hr />
+
+    <!-- ——— 性别（单选按钮 + fieldset） ——— -->
+    <fieldset>
+      <legend>性别</legend>
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="gender" value="male" />
+          男
+        </label>
+        <label>
+          <input type="radio" name="gender" value="female" />
+          女
+        </label>
+        <label>
+          <input type="radio" name="gender" value="other" />
+          其他 / 不愿透露
+        </label>
+      </div>
+      <!--
+        单选按钮：同 name 属性的按钮只能选一个
+        value：提交时传给服务端的值（不是显示的文字）
+        fieldset + legend 将相关控件分组，语义清晰
+      -->
+    </fieldset>
+
+    <!-- ——— 兴趣爱好（复选框） ——— -->
+    <fieldset>
+      <legend>技术兴趣（可多选）</legend>
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" name="interest" value="frontend" />
+          前端开发
+        </label>
+        <label>
+          <input type="checkbox" name="interest" value="backend" />
+          后端开发
+        </label>
+        <label>
+          <input type="checkbox" name="interest" value="mobile" />
+          移动端开发
+        </label>
+        <label>
+          <input type="checkbox" name="interest" value="ai" />
+          AI / 机器学习
+        </label>
+      </div>
+      <!--
+        复选框：可多选，每个 name 相同（提交时是数组）
+        label 包裹 input 的写法：点击文字也能切换选中状态
+      -->
+    </fieldset>
+
+    <!-- ——— 城市（下拉选择） ——— -->
+    <div class="form-group">
+      <label for="city">所在城市</label>
+      <select id="city" name="city">
+        <option value="">-- 请选择 --</option>
+        <!--
+          value="" 的 option 作为默认提示项
+          如果这个字段是 required，用户必须选一个有值的 option
+        -->
+        <optgroup label="直辖市">
+          <option value="beijing">北京</option>
+          <option value="shanghai">上海</option>
+          <option value="tianjin">天津</option>
+          <option value="chongqing">重庆</option>
+        </optgroup>
+        <optgroup label="其他城市">
+          <option value="hangzhou">杭州</option>
+          <option value="shenzhen">深圳</option>
+          <option value="guangzhou">广州</option>
+          <option value="chengdu">成都</option>
+        </optgroup>
+      </select>
+      <!--
+        optgroup 将选项分组，label 是分组标题（不可选）
+        浏览器会显示分组标题和缩进，提升可读性
+      -->
+    </div>
+
+    <!-- ——— 个人简介（多行文本） ——— -->
+    <div class="form-group">
+      <label for="bio">个人简介</label>
+      <textarea
+        id="bio"
+        name="bio"
+        rows="4"
+        maxlength="300"
+        placeholder="简单介绍一下你自己、你的技术背景和学习目标..."
+      ></textarea>
+      <!--
+        textarea 是双标签，不是自闭合
+        初始值写在标签之间（不用 value 属性）
+        rows 控制默认显示的行数（视觉高度）
+        用户可以拖动右下角调整大小
+      -->
+      <p class="hint">最多 300 字</p>
+    </div>
+
+    <!-- ——— 隐藏字段 ——— -->
+    <input type="hidden" name="source" value="registration-page" />
+    <!--
+      hidden input：不显示在页面，但会随表单一起提交
+      常用于：传递页面来源、CSRF token、用户行为追踪 ID 等
+    -->
+
+    <!-- ——— 提交按钮 ——— -->
+    <button type="reset">重置</button>
+    <button type="submit">创建账号</button>
+    <!--
+      type="submit"：提交表单
+      type="reset"：重置所有字段到初始值（慎用，用户误点容易丢失数据）
+      type="button"：普通按钮，不触发表单提交（配合 JS 使用）
+
+      提交按钮建议用 <button type="submit"> 而不是 <input type="submit">
+      原因：button 内可以放图标等 HTML 内容，更灵活
+    -->
+
+  </form>
+
+  <hr />
+
+  <!-- ==========================================
+    演示：错误状态
+    ========================================== -->
+  <h2>表单验证状态演示</h2>
+
+  <div class="form-group">
+    <label for="email-error">邮箱地址</label>
+    <input
+      type="email"
+      id="email-error"
+      class="error-example"
+      value="not-an-email"
+      aria-describedby="email-error-msg"
+      aria-invalid="true"
+    />
+    <!--
+      aria-invalid="true"：告诉屏幕阅读器"这个字段有错误"
+      aria-describedby：指向错误信息元素的 id，屏幕阅读器会读出错误
+    -->
+    <p class="error-msg" id="email-error-msg" role="alert">
+      请输入有效的邮箱地址（例：hello@example.com）
+    </p>
+    <!--
+      role="alert"：屏幕阅读器会立即播报这段文字（不需要聚焦）
+      id 与 aria-describedby 配对使用
+    -->
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>练习六：博客页面骨架</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: sans-serif; line-height: 1.7; background: #f5f5f5; color: #1a1a1a; }
+
+    /* 这些样式已经准备好，你只需要写正确的 HTML 结构 */
+    body > header { background: #1a1a1a; color: white; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    body > header a { color: white; text-decoration: none; font-weight: bold; }
+    body > header nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; }
+    body > header nav a { color: white; text-decoration: none; font-size: 0.9em; }
+
+    .layout { max-width: 1100px; margin: 0 auto; padding: 32px 24px; display: grid; grid-template-columns: 1fr 280px; gap: 32px; }
+
+    main article { background: white; padding: 40px; border-radius: 12px; }
+    main article > header { border-bottom: 1px solid #e5e7eb; padding-bottom: 20px; margin-bottom: 28px; }
+    main article h1 { margin: 0 0 10px; }
+    main article .meta { color: #6b7280; font-size: 0.875em; }
+    main article section h2 { border-left: 4px solid #3b82f6; padding-left: 12px; }
+    main article > footer { border-top: 1px solid #e5e7eb; padding-top: 16px; margin-top: 28px; font-size: 0.875em; color: #6b7280; }
+
+    .comments { background: white; border-radius: 12px; padding: 32px; margin-top: 24px; }
+    .comments h2 { margin-top: 0; }
+    .comment { padding: 16px 0; border-bottom: 1px solid #f3f4f6; }
+    .comment:last-child { border-bottom: none; }
+    .comment strong { display: block; }
+    .comment time { font-size: 0.8em; color: #9ca3af; }
+
+    aside .widget { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    aside .widget h2 { font-size: 1em; margin-top: 0; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px; }
+    aside .widget ul { list-style: none; margin: 0; padding: 0; font-size: 0.875em; }
+    aside .widget li { padding: 8px 0; border-bottom: 1px solid #f9fafb; }
+    aside .widget li:last-child { border-bottom: none; }
+    aside a { color: #1a1a1a; text-decoration: none; }
+    aside a:hover { color: #3b82f6; }
+
+    body > footer { background: #1a1a1a; color: #9ca3af; text-align: center; padding: 32px; margin-top: 48px; font-size: 0.875em; }
+    body > footer a { color: #9ca3af; text-decoration: none; margin: 0 12px; }
+
+    @media (max-width: 768px) { .layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!--
+    练习六：搭建完整的博客文章页面
+    ============================================================
+    CSS 样式已经写好，你只需要写正确的 HTML 语义结构。
+    写完后用浏览器打开，如果结构正确，页面会自动应用好看的样式。
+
+    提示：对照 notes.md 中的"典型页面布局图"来构建结构
+
+    要求：
+
+    ① 【<header>（页面级）】
+       包含：
+       - 你的网站名称/logo（用 <a href="/"> 包裹）
+       - <nav aria-label="主导航"> 里有 <ul><li><a> 结构的导航
+         链接：首页 / 博客 / 项目 / 关于我（当前页"博客"加 aria-current="page"）
+
+    ② 【<div class="layout">（双栏布局容器）】
+       里面包含 <main> 和 <aside> 两个子元素
+
+    ③ 【<main> 内容区】
+       A. <article>（文章主体）
+          - <article> 内部的 <header>：
+            * <h1> 文章标题（自己起一个，如"我的 HTML 学习记录"）
+            * <div class="meta"> 包含：
+              - 作者（自己的名字，用 <a> 链接到 /about）
+              - <time datetime="2026-03-17">2026 年 3 月 17 日</time>
+              - 分类标签
+          - 两个 <section>（每个有 <h2> + 至少 2 个 <p>）
+            * 第一节：自选话题（如"学习 HTML 的第一周"）
+            * 第二节：自选话题（如"我遇到的难点"）
+          - <article> 内部的 <footer>：
+            * 3~4 个标签（用 <a> 模拟，链接到 /tag/...）
+
+       B. <section class="comments">（评论区，在 article 之后）
+          - <h2>评论（2）</h2>
+          - 两条评论，每条是一个 <article class="comment">：
+            * <strong> 评论者名字
+            * <time> 评论时间
+            * <p> 评论内容
+
+    ④ 【<aside>（侧边栏）】
+       两个 <div class="widget">：
+       A. 第一个 widget：
+          - <h2>相关文章</h2>
+          - <ul><li><a> 列表，3 条链接
+       B. 第二个 widget：
+          - <h2>关于作者</h2>
+          - <p> 简短介绍
+
+    ⑤ 【<footer>（页面级）】
+       - <p> 版权信息
+       - <nav aria-label="页脚链接"> 内 2~3 个 <a>
+
+    检验清单：
+    □ 页面只有一个 <main>
+    □ 文章内有 <article>，且 article 内有 header 和 footer
+    □ 两个 <nav> 都有不同的 aria-label
+    □ 评论区用了 <section>，每条评论用了 <article>
+    □ 侧边栏用了 <aside>
+    □ 时间元素用了 <time datetime="...">
+    □ 用浏览器打开，样式正确应用（无需修改 CSS）
+    ============================================================
+  -->
+
+  <!-- TODO: 在这里写你的 HTML 结构 -->
+
+</body>
+</html>
